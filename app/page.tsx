@@ -116,7 +116,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Hero />
+      <Hero hasArchive={archive.length > 0} />
       <EventsSection upcoming={upcoming} archive={archive} />
       <InfoSections />
     </main>

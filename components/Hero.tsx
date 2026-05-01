@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export function Hero() {
+export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
   return (
     <section className="relative overflow-hidden bg-ink text-white">
       <div className="absolute inset-0">
@@ -28,7 +28,7 @@ export function Hero() {
           </a>
           <div className="hidden gap-6 md:flex">
             <a href="#podujatia">Podujatia</a>
-            <a href="#archiv">Archív</a>
+            {hasArchive ? <a href="#archiv">Archív</a> : null}
             <a href="#kontakt">Kontakt</a>
           </div>
         </nav>
