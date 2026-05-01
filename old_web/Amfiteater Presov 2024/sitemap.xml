@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url>
+	<loc>https://amfiteaterpresov.sk</loc>
+	<lastmod>2024-06-03</lastmod>
+	<changefreq>Weekly</changefreq>
+	<priority>1.0</priority>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/Amfiteáter%20Prešov_logo.svg</image:loc>
+	<image:title>logo</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/final.png</image:loc>
+	<image:title>final</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/final.webp</image:loc>
+	<image:title>final</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/historia.webp</image:loc>
+	<image:title>placeholder image</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/01.webp</image:loc>
+	<image:title>Knižnica</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/02.webp</image:loc>
+	<image:title>Knižnica</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/</image:loc>
+	<image:title>Twitter Social Card Image</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/</image:loc>
+	<image:title>Facebook Social Card Image</image:title>
+	</image:image>
+</url>
+<url>
+	<loc>https://amfiteaterpresov.sk/dve-percenta-z-dani/</loc>
+	<lastmod>2024-06-03</lastmod>
+	<changefreq>Weekly</changefreq>
+	<priority>0.5</priority>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/</image:loc>
+	<image:title>Twitter Social Card Image</image:title>
+	</image:image>
+	<image:image>
+	<image:loc>https://amfiteaterpresov.sk/img/</image:loc>
+	<image:title>Facebook Social Card Image</image:title>
+	</image:image>
+</url>
+</urlset>
