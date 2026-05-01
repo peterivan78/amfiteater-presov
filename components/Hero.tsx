@@ -34,7 +34,7 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
         </nav>
         <div className="relative z-10 max-w-4xl py-20">
           <p className="mb-5 text-sm uppercase tracking-[0.35em] text-white/60">Kultúrny priestor pod holým nebom</p>
-          <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">Amfiteáter Prešov</h1>
+          <p className="text-5xl font-semibold tracking-tight md:text-7xl">Amfiteáter Prešov</p>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
             Letné koncerty, filmové večery, festivaly a komunitné podujatia v priestore, ktorý patrí prešovčanom.
           </p>

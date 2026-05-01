@@ -54,6 +54,9 @@ export function InfoSections() {
               </div>
             </div>
           </div>
+          <p className="mt-12 max-w-2xl text-sm leading-6 text-white/45">
+            Amfiteáter Prešov — koncerty, festivaly, letné kino a kultúrne podujatia v Prešove.
+          </p>
           <div className="mt-12 border-t border-white/10 pt-6 text-sm text-white/45">Copyright {currentYear} Amfiteáter Prešov. Made by PI LAB</div>
         </div>
       </footer>

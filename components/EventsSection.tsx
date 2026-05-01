@@ -14,6 +14,9 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
           <div>
             <p className="mb-2 text-sm uppercase tracking-[0.25em] text-accent">Program</p>
             <h2 className="text-3xl font-semibold md:text-5xl">Najbližšie podujatia</h2>
+            <p className="mt-4 max-w-2xl leading-7 text-black/60">
+              Program Amfiteátra Prešov prináša koncerty, festivaly, filmové premietania a špeciálne kultúrne podujatia počas celej sezóny.
+            </p>
           </div>
         </div>
         {upcoming.length ? (
