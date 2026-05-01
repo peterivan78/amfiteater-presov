@@ -72,3 +72,15 @@ NEXT_PUBLIC_SITE_URL=https://amfiteater-presov.vercel.app
 3. Refine section structure and visual polish.
 4. Improve admin UX for events.
 5. Only after that: configure production domain and final redirects.
+
+## Before push / deploy reminder
+
+- Add production `ADMIN_EMAILS` env variable.
+- In Supabase SQL editor, apply the updated admin/storage SQL:
+  - `supabase/schema.sql`
+  - insert every admin email into `public.admin_users`
+  - `supabase/storage.sql`
+- Confirm Supabase Auth magic-link settings:
+  - local redirect: `http://localhost:3000/auth/callback`
+  - preview redirect: `https://amfiteater-presov.vercel.app/auth/callback`
+- Confirm the public Storage bucket `event-images` exists.

@@ -11,6 +11,7 @@ Next.js + Supabase scaffold pre one-page web s administráciou podujatí.
 - editácia podujatia `/admin/events/[id]`
 - automatické delenie podujatí na najbližšie a archív podľa `start_at`
 - upload obrázkov do Supabase Storage
+- voliteľný koniec podujatia pre viacdňové programy
 
 ## 1. Lokálny setup
 
@@ -46,6 +47,7 @@ Do `.env.local` doplň:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+ADMIN_EMAILS=admin@example.com
 SUPABASE_SERVICE_ROLE_KEY=...
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
@@ -58,7 +60,19 @@ V Supabase Auth povoľ Email OTP / Magic Link.
 
 Prihlásenie funguje cez `/login`.
 
-V aktuálnom starteri môžu eventy spravovať všetci prihlásení používatelia. Pre produkciu odporúčané doplnenie: tabuľka `admin_users` alebo kontrola podľa konkrétneho emailu.
+Do `ADMIN_EMAILS` doplň povolené admin emaily oddelené čiarkou.
+
+V Supabase SQL editore vlož rovnaké emaily aj do tabuľky `admin_users`:
+
+```sql
+insert into public.admin_users (email)
+values ('admin@example.com')
+on conflict do nothing;
+```
+
+Potom spusti aktualizované `supabase/schema.sql` a `supabase/storage.sql`, aby boli eventy a upload obrázkov zapisovateľné iba povolenými adminmi.
+
+Obrázky v admin formulári sa ukladajú ako WebP bez orezania. Plagát je povinný a má max. šírku 1080 px. Cover vizuál je voliteľný pre zvýraznené podujatia a má max. šírku 1600 px. Formulár prijíma JPG, PNG a WebP; PDF a SVG odmietne. Pri viacdňových podujatiach vyplň aj pole `Koniec`.
 
 ## 5. Deploy na Vercel
 

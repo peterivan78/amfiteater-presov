@@ -1,13 +1,9 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { AdminEventForm } from '@/components/AdminEventForm';
-import { createServerSupabaseClient } from '@/lib/supabase-server';
+import { requireAdmin } from '@/lib/admin';
 
 export default async function NewEventPage() {
-  const supabase = await createServerSupabaseClient();
-  if (!supabase) redirect('/login');
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) redirect('/login');
+  await requireAdmin();
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-8">

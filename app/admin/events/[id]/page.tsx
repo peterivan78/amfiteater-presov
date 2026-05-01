@@ -1,15 +1,11 @@
 import Link from 'next/link';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { AdminEventForm } from '@/components/AdminEventForm';
-import { createServerSupabaseClient } from '@/lib/supabase-server';
+import { requireAdmin } from '@/lib/admin';
 import type { EventItem } from '@/lib/types';
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
-  const supabase = await createServerSupabaseClient();
-  if (!supabase) redirect('/login');
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) redirect('/login');
-
+  const { supabase } = await requireAdmin();
   const { id } = await params;
   const { data } = await supabase.from('events').select('*').eq('id', id).single();
   if (!data) notFound();
