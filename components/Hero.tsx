@@ -27,7 +27,8 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
             />
           </a>
           <div className="hidden gap-6 md:flex">
-            <a href="#podujatia">Podujatia</a>
+            <a href="#program">Podujatia</a>
+            <a href="#o-amfiteatri">O amfiteátri</a>
             {hasArchive ? <a href="#archiv">Archív</a> : null}
             <a href="#kontakt">Kontakt</a>
           </div>

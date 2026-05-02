@@ -1,0 +1,19 @@
+# Amfiteáter Prešov
+
+Amfiteáter Prešov je open-air kultúrny priestor v meste Prešov na Slovensku. Slúži pre koncerty, festivaly, letné kino, filmové projekcie a kultúrne podujatia pod holým nebom.
+
+## Main topics
+- koncerty v Prešove
+- festivaly v Prešove
+- letné kino Prešov
+- open-air podujatia
+- kultúrne podujatia Prešov
+- program Amfiteátra Prešov
+
+## Website
+https://amfiteater-presov.vercel.app/
+
+## Recommended pages
+- Homepage: https://amfiteater-presov.vercel.app/
+- Program: https://amfiteater-presov.vercel.app/#program
+- Kontakt: https://amfiteater-presov.vercel.app/#kontakt

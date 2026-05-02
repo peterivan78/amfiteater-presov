@@ -1,5 +1,6 @@
 import type { EventItem } from '@/lib/types';
 import { formatEventDateRange } from '@/lib/utils';
+import { eventPath } from '@/lib/seo';
 import { EventCard } from './EventCard';
 import { FeaturedEventCard } from './FeaturedEventCard';
 
@@ -9,7 +10,8 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
 
   return (
     <>
-      <section id="podujatia" className="mx-auto max-w-6xl px-5 py-16 md:px-8">
+      <section id="program" className="mx-auto max-w-6xl px-5 py-16 md:px-8">
+        <span id="podujatia" className="sr-only" aria-hidden="true" />
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
             <p className="mb-2 text-sm uppercase tracking-[0.25em] text-accent">Program</p>
@@ -44,7 +46,9 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
               <div key={event.id} className="grid gap-2 p-4 transition hover:bg-black/[0.03] md:grid-cols-[220px_1fr] md:items-center md:p-5">
                 <p className="text-sm text-black/55">{event.display_date ?? formatEventDateRange(event.start_at, event.end_at)}</p>
                 <div>
-                  <h3 className="font-semibold">{event.title}</h3>
+                  <h3 className="font-semibold">
+                    <a className="transition hover:text-accent" href={eventPath(event)}>{event.title}</a>
+                  </h3>
                   {event.short_description ? <p className="mt-1 text-sm leading-6 text-black/60">{event.short_description}</p> : null}
                 </div>
               </div>

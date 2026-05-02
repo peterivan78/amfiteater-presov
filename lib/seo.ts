@@ -1,6 +1,18 @@
 import type { EventItem } from '@/lib/types';
 
 export const siteUrl = 'https://amfiteater-presov.vercel.app';
+export const siteHomeUrl = `${siteUrl}/`;
+
+const organizationId = `${siteUrl}/#organization`;
+const placeId = `${siteUrl}/#place`;
+
+export function eventUrl(event: EventItem) {
+  return `${siteUrl}${eventPath(event)}`;
+}
+
+export function eventPath(event: EventItem) {
+  return `/podujatia/${event.slug}`;
+}
 
 export const faqItems = [
   {
@@ -25,18 +37,64 @@ export const faqItems = [
   }
 ];
 
-const organizationId = `${siteUrl}/#organization`;
-const placeId = `${siteUrl}/#place`;
+export function eventDescription(event: EventItem) {
+  return event.short_description || `Podujatie ${event.title} v Amfiteátri Prešov.`;
+}
+
+export function buildEventStructuredData(event: EventItem) {
+  return {
+    '@type': 'Event',
+    '@id': `${eventUrl(event)}#event`,
+    name: event.title,
+    description: eventDescription(event),
+    startDate: event.start_at,
+    ...(event.end_at ? { endDate: event.end_at } : {}),
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    image: [event.cover_image_url || event.image_url],
+    url: eventUrl(event),
+    location: {
+      '@type': 'Place',
+      '@id': placeId,
+      name: 'Amfiteáter Prešov',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Prešov',
+        addressCountry: 'SK'
+      }
+    },
+    organizer: {
+      '@id': organizationId
+    },
+    ...(event.ticket_url
+      ? {
+          offers: {
+            '@type': 'Offer',
+            url: event.ticket_url,
+            availability: 'https://schema.org/InStock'
+          }
+        }
+      : {})
+  };
+}
 
 export function buildStructuredData(events: EventItem[]) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        name: 'Amfiteáter Prešov',
+        url: siteHomeUrl,
+        inLanguage: 'sk-SK'
+      },
+      {
         '@type': 'Organization',
         '@id': organizationId,
-        name: 'Občianske združenie Amfiteáter Prešov',
-        url: siteUrl,
+        name: 'Amfiteáter Prešov',
+        url: siteHomeUrl,
+        logo: `${siteUrl}/assets/logo.svg`,
         email: 'info@amfiteaterpresov.sk',
         address: {
           '@type': 'PostalAddress',
@@ -51,8 +109,8 @@ export function buildStructuredData(events: EventItem[]) {
         '@id': placeId,
         name: 'Amfiteáter Prešov',
         description:
-          'Ikonický open-air kultúrny priestor v Prešove určený pre koncerty, festivaly, letné kino a veľké spoločenské podujatia.',
-        url: siteUrl,
+          'Open-air kultúrny priestor v Prešove určený pre koncerty, festivaly, letné kino a kultúrne podujatia.',
+        url: siteHomeUrl,
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Prešov',
@@ -71,33 +129,7 @@ export function buildStructuredData(events: EventItem[]) {
           }
         }))
       },
-      ...events.map((event) => ({
-        '@type': 'Event',
-        '@id': `${siteUrl}/#event-${event.slug}`,
-        name: event.title,
-        description: event.short_description || `Podujatie ${event.title} v Amfiteátri Prešov.`,
-        startDate: event.start_at,
-        ...(event.end_at ? { endDate: event.end_at } : {}),
-        eventStatus: 'https://schema.org/EventScheduled',
-        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-        image: [event.cover_image_url || event.image_url],
-        url: siteUrl,
-        location: {
-          '@id': placeId
-        },
-        organizer: {
-          '@id': organizationId
-        },
-        ...(event.ticket_url
-          ? {
-              offers: {
-                '@type': 'Offer',
-                url: event.ticket_url,
-                availability: 'https://schema.org/InStock'
-              }
-            }
-          : {})
-      }))
+      ...events.map((event) => buildEventStructuredData(event))
     ]
   };
 }

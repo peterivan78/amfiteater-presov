@@ -1,3 +1,4 @@
+import { FaqAccordion } from '@/components/FaqAccordion';
 import { faqItems } from '@/lib/seo';
 
 export function HomepageIntro() {
@@ -8,6 +9,12 @@ export function HomepageIntro() {
         <p className="mt-4 leading-7 text-black/65">
           Amfiteáter Prešov je ikonický open-air kultúrny priestor v Prešove určený pre koncerty, festivaly, letné kino a veľké spoločenské podujatia. Počas sezóny prináša program domácich aj zahraničných interpretov, filmové projekcie a kultúrne eventy pod holým nebom.
         </p>
+        <nav className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-black/55" aria-label="Rýchle odkazy">
+          <a className="transition hover:text-accent" href="#program">Program</a>
+          <a className="transition hover:text-accent" href="#o-amfiteatri">O amfiteátri</a>
+          <a className="transition hover:text-accent" href="#kontakt">Kontakt</a>
+          <a className="transition hover:text-accent" href="#program">Podujatia</a>
+        </nav>
       </div>
     </section>
   );
@@ -15,7 +22,7 @@ export function HomepageIntro() {
 
 export function AboutAmphitheatre() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-14" aria-labelledby="about-amphitheatre-title">
+    <section id="o-amfiteatri" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-14" aria-labelledby="about-amphitheatre-title">
       <div className="max-w-3xl">
         <p className="mb-2 text-sm uppercase tracking-[0.25em] text-accent">O amfiteátri</p>
         <h2 id="about-amphitheatre-title" className="text-3xl font-semibold md:text-5xl">O amfiteátri</h2>
@@ -33,19 +40,7 @@ export function FaqSection() {
       <div className="max-w-3xl">
         <p className="mb-2 text-sm uppercase tracking-[0.25em] text-black/45">FAQ</p>
         <h2 id="faq-title" className="text-3xl font-semibold md:text-5xl">Časté otázky</h2>
-        <div className="mt-6 divide-y divide-black/10 border-y border-black/10">
-          {faqItems.map((item) => (
-            <details key={item.question} className="group py-4">
-              <summary className="cursor-pointer list-none font-medium outline-none transition hover:text-accent focus-visible:text-accent">
-                <span className="inline-flex w-full items-center justify-between gap-6">
-                  {item.question}
-                  <span className="text-xl leading-none text-black/35 transition group-open:rotate-45">+</span>
-                </span>
-              </summary>
-              <p className="mt-3 leading-7 text-black/65">{item.answer}</p>
-            </details>
-          ))}
-        </div>
+        <FaqAccordion items={faqItems} />
       </div>
     </section>
   );

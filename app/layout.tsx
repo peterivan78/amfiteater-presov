@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { siteUrl } from '@/lib/seo';
+import { siteHomeUrl, siteUrl } from '@/lib/seo';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -7,12 +7,20 @@ export const metadata: Metadata = {
   title: 'Amfiteáter Prešov – koncerty, festivaly a kultúrne podujatia',
   description: 'Oficiálny program Amfiteátra Prešov. Koncerty, festivaly, letné kino a kultúrne podujatia pod holým nebom v Prešove.',
   alternates: {
-    canonical: '/'
+    canonical: siteHomeUrl
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true
+    }
   },
   openGraph: {
     type: 'website',
     locale: 'sk_SK',
-    url: siteUrl,
+    url: siteHomeUrl,
     siteName: 'Amfiteáter Prešov',
     title: 'Amfiteáter Prešov – koncerty, festivaly a kultúrne podujatia',
     description: 'Oficiálny program Amfiteátra Prešov. Koncerty, festivaly, letné kino a kultúrne podujatia pod holým nebom v Prešove.',

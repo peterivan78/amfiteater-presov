@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { CalendarDays } from 'lucide-react';
 import type { EventItem } from '@/lib/types';
 import { formatEventDateRange } from '@/lib/utils';
+import { eventPath } from '@/lib/seo';
 
 export function FeaturedEventCard({ event }: { event: EventItem }) {
   const imageUrl = event.cover_image_url || event.image_url;
@@ -12,7 +13,7 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
         <div className="relative min-h-[320px] bg-black/20 md:min-h-[460px]">
           <Image
             src={imageUrl}
-            alt={event.title}
+            alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
             fill
             className="object-contain transition duration-300 group-hover:scale-[1.01]"
             sizes="(max-width: 768px) 100vw, 58vw"
@@ -26,7 +27,9 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
               <CalendarDays className="mt-0.5 h-4 w-4" />
               <span>{event.display_date ?? formatEventDateRange(event.start_at, event.end_at)}</span>
             </div>
-            <h3 className="text-4xl font-semibold leading-tight md:text-6xl">{event.title}</h3>
+            <h3 className="text-4xl font-semibold leading-tight md:text-6xl">
+              <a className="transition hover:text-accent" href={eventPath(event)}>{event.title}</a>
+            </h3>
             {event.short_description ? <p className="mt-6 text-base leading-7 text-white/70">{event.short_description}</p> : null}
           </div>
           {event.ticket_url ? (
