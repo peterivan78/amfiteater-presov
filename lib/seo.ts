@@ -1,4 +1,5 @@
 import type { EventItem } from '@/lib/types';
+import { toSlug } from '@/lib/utils';
 
 export const siteUrl = 'https://amfiteater-presov.vercel.app';
 export const siteHomeUrl = `${siteUrl}/`;
@@ -11,7 +12,18 @@ export function eventUrl(event: EventItem) {
 }
 
 export function eventPath(event: EventItem) {
-  return `/podujatia/${event.slug}`;
+  return `/podujatia/${publicEventSlug(event)}`;
+}
+
+export function publicEventSlug(event: EventItem) {
+  const year = new Date(event.start_at).getFullYear();
+  const baseSlug = (event.slug || toSlug(event.title)).replace(/-\d{10,}$/, '');
+
+  if (baseSlug.endsWith(`-${year}`)) {
+    return baseSlug;
+  }
+
+  return `${baseSlug}-${year}`;
 }
 
 export const faqItems = [

@@ -184,7 +184,7 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
 
     const payload = {
       title,
-      slug: `${toSlug(title)}-${new Date(startAt).getTime()}`,
+      slug: `${toSlug(title)}-${new Date(startAt).getFullYear()}`,
       image_url: posterImageUrl,
       cover_image_url: coverImageUrl || null,
       start_at: new Date(startAt).toISOString(),

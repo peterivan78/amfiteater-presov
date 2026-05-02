@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { getSupabaseEnv } from '@/lib/supabase-config';
+import { publicEventSlug } from '@/lib/seo';
 import type { EventItem } from '@/lib/types';
 
 export const currentProgram: EventItem[] = [
@@ -135,5 +136,5 @@ export async function getAllPublishedEvents() {
 
 export async function getEventBySlug(slug: string) {
   const events = await getAllPublishedEvents();
-  return events.find((event) => event.slug === slug) ?? null;
+  return events.find((event) => event.slug === slug || publicEventSlug(event) === slug) ?? null;
 }
