@@ -11,14 +11,16 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
     <article className="group overflow-hidden rounded-2xl bg-ink text-white shadow-xl transition duration-200 hover:shadow-2xl">
       <div className="grid md:grid-cols-[1.15fr_0.85fr]">
         <div className="relative min-h-[320px] bg-black/20 md:min-h-[460px]">
-          <Image
-            src={imageUrl}
-            alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
-            fill
-            className="object-contain transition duration-300 group-hover:scale-[1.01]"
-            sizes="(max-width: 768px) 100vw, 58vw"
-            priority
-          />
+          <a href={eventPath(event)} aria-label={`Detail podujatia ${event.title}`}>
+            <Image
+              src={imageUrl}
+              alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
+              fill
+              className="object-contain transition duration-300 group-hover:scale-[1.01]"
+              sizes="(max-width: 768px) 100vw, 58vw"
+              priority
+            />
+          </a>
         </div>
         <div className="flex flex-col justify-between gap-10 p-6 md:p-10">
           <div>
@@ -32,11 +34,16 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
             </h3>
             {event.short_description ? <p className="mt-6 text-base leading-7 text-white/70">{event.short_description}</p> : null}
           </div>
-          {event.ticket_url ? (
-            <a className="inline-flex w-fit rounded-2xl bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent hover:text-white" href={event.ticket_url} target="_blank" rel="noreferrer">
-              Vstupenky / viac info
+          <div className="flex flex-wrap gap-3">
+            <a className="inline-flex w-fit rounded-2xl border border-white/20 px-5 py-3 text-sm font-medium text-white transition hover:border-accent hover:text-accent" href={eventPath(event)}>
+              Detail podujatia
             </a>
-          ) : null}
+            {event.ticket_url ? (
+              <a className="inline-flex w-fit rounded-2xl bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent hover:text-white" href={event.ticket_url} target="_blank" rel="noreferrer">
+                Vstupenky / viac info
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>
