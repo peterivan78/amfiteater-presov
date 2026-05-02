@@ -8,7 +8,7 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
   const imageUrl = event.cover_image_url || event.image_url;
 
   return (
-    <article className="group overflow-hidden rounded-2xl bg-ink text-white shadow-xl transition duration-200 hover:shadow-2xl">
+    <article className="group overflow-hidden bg-ink text-white shadow-xl transition duration-200 hover:shadow-2xl">
       <div className="grid md:grid-cols-[1.15fr_0.85fr]">
         <div className="relative min-h-[320px] bg-black/20 md:min-h-[460px]">
           <a href={eventPath(event)} aria-label={`Detail podujatia ${event.title}`}>
@@ -35,11 +35,11 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
             {event.short_description ? <p className="mt-6 text-base leading-7 text-white/70">{event.short_description}</p> : null}
           </div>
           <div className="flex flex-wrap gap-3">
-            <a className="inline-flex w-fit rounded-2xl border border-white/20 px-5 py-3 text-sm font-medium text-white transition hover:border-accent hover:text-accent" href={eventPath(event)}>
+            <a className="inline-flex w-fit border border-white/20 px-5 py-3 text-sm font-medium text-white transition hover:border-accent hover:text-accent" href={eventPath(event)}>
               Detail podujatia
             </a>
             {event.ticket_url ? (
-              <a className="inline-flex w-fit rounded-2xl bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent hover:text-white" href={event.ticket_url} target="_blank" rel="noreferrer">
+              <a className="inline-flex w-fit bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent hover:text-white" href={event.ticket_url} target="_blank" rel="noreferrer">
                 Vstupenky / viac info
               </a>
             ) : null}

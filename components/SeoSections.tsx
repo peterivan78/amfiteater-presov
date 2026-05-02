@@ -9,12 +9,6 @@ export function HomepageIntro() {
         <p className="mt-4 leading-7 text-black/65">
           Amfiteáter Prešov je ikonický open-air kultúrny priestor v Prešove určený pre koncerty, festivaly, letné kino a veľké spoločenské podujatia. Počas sezóny prináša program domácich aj zahraničných interpretov, filmové projekcie a kultúrne eventy pod holým nebom.
         </p>
-        <nav className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-black/55" aria-label="Rýchle odkazy">
-          <a className="transition hover:text-accent" href="#program">Program</a>
-          <a className="transition hover:text-accent" href="#o-amfiteatri">O amfiteátri</a>
-          <a className="transition hover:text-accent" href="#kontakt">Kontakt</a>
-          <a className="transition hover:text-accent" href="#program">Podujatia</a>
-        </nav>
       </div>
     </section>
   );

@@ -74,7 +74,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
       <article className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-16">
         <a className="text-sm text-black/55 transition hover:text-accent" href="/#program">Späť na program</a>
         <div className="mt-8 grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-start">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink">
+          <div className="relative aspect-[4/5] overflow-hidden bg-ink">
             <Image
               src={image}
               alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
@@ -107,7 +107,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
             {event.ticket_url ? (
               <section className="mt-8 border-t border-black/10 pt-6" aria-labelledby="vstupenky">
                 <h2 id="vstupenky" className="text-2xl font-semibold">Vstupenky</h2>
-                <a className="mt-4 inline-flex rounded-2xl bg-ink px-5 py-3 text-sm font-medium text-white transition hover:bg-accent" href={event.ticket_url} target="_blank" rel="noreferrer">
+                <a className="mt-4 inline-flex bg-ink px-5 py-3 text-sm font-medium text-white transition hover:bg-accent" href={event.ticket_url} target="_blank" rel="noreferrer">
                   Vstupenky / viac info
                 </a>
               </section>

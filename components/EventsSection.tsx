@@ -31,7 +31,7 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
             ) : null}
           </div>
         ) : (
-          <p className="rounded-lg border border-black/10 bg-white p-6 text-black/60">Aktuálne nie sú zverejnené žiadne najbližšie podujatia.</p>
+          <p className="border border-black/10 bg-white p-6 text-black/60">Aktuálne nie sú zverejnené žiadne najbližšie podujatia.</p>
         )}
       </section>
 
@@ -41,7 +41,7 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
             <p className="mb-2 text-sm uppercase tracking-[0.25em] text-black/45">Minulé podujatia</p>
             <h2 className="text-3xl font-semibold md:text-5xl">Archív podujatí</h2>
           </div>
-          <div className="divide-y divide-black/10 rounded-lg border border-black/10 bg-white">
+          <div className="divide-y divide-black/10 border border-black/10 bg-white">
             {archive.map((event) => (
               <div key={event.id} className="grid gap-2 p-4 transition hover:bg-black/[0.03] md:grid-cols-[220px_1fr] md:items-center md:p-5">
                 <p className="text-sm text-black/55">{event.display_date ?? formatEventDateRange(event.start_at, event.end_at)}</p>

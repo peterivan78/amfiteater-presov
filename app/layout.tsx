@@ -1,6 +1,18 @@
 import type { Metadata } from 'next';
+import { Bebas_Neue, Manrope } from 'next/font/google';
 import { siteHomeUrl, siteUrl } from '@/lib/seo';
 import './globals.css';
+
+const bebasNeue = Bebas_Neue({
+  subsets: ['latin', 'latin-ext'],
+  weight: '400',
+  variable: '--font-display'
+});
+
+const manrope = Manrope({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-sans'
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,8 +55,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="sk">
-      <body>{children}</body>
+    <html lang="sk" className={`${bebasNeue.variable} ${manrope.variable}`}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

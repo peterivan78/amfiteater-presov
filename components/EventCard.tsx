@@ -6,7 +6,7 @@ import { eventPath } from '@/lib/seo';
 
 export function EventCard({ event, compact = false }: { event: EventItem; compact?: boolean }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl">
+    <article className="group overflow-hidden border border-black/10 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl">
       <div className="relative aspect-[4/5] bg-ink">
         <a href={eventPath(event)} aria-label={`Detail podujatia ${event.title}`}>
           <Image
@@ -28,7 +28,7 @@ export function EventCard({ event, compact = false }: { event: EventItem; compac
         </h3>
         {!compact && event.short_description ? <p className="text-sm leading-6 text-black/65">{event.short_description}</p> : null}
         {event.ticket_url ? (
-          <a className="inline-flex rounded-2xl bg-ink px-4 py-2 text-sm font-medium text-white transition hover:bg-accent" href={event.ticket_url} target="_blank" rel="noreferrer">
+          <a className="inline-flex bg-ink px-4 py-2 text-sm font-medium text-white transition hover:bg-accent" href={event.ticket_url} target="_blank" rel="noreferrer">
             Vstupenky / viac info
           </a>
         ) : null}

@@ -6,9 +6,9 @@ export function InfoSections() {
   return (
     <>
       <section id="historia" className="mx-auto max-w-6xl px-5 py-16 md:px-8">
-        <div className="grid gap-8 rounded-lg bg-white p-8 md:grid-cols-[1.1fr_1fr] md:items-center md:p-12">
+        <div className="grid gap-8 bg-white p-8 md:grid-cols-[1.1fr_1fr] md:items-center md:p-12">
           <div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-black/5">
+            <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
               <Image
                 src="/assets/historia.webp"
                 alt="Historický pohľad na open-air kultúrny priestor Amfiteáter Prešov v roku 1966"

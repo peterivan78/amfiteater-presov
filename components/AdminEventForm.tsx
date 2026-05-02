@@ -232,62 +232,62 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
   }
 
   return (
-    <form onSubmit={save} className="space-y-5 rounded-2xl bg-white p-5 shadow-sm md:p-8">
+    <form onSubmit={save} className="space-y-5 bg-white p-5 shadow-sm md:p-8">
       <div>
         <label className="mb-2 block text-sm font-medium">Názov</label>
-        <input className="w-full rounded-lg border border-black/15 px-4 py-3" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <input className="w-full border border-black/15 px-4 py-3" value={title} onChange={(e) => setTitle(e.target.value)} required />
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
         <div>
           <label className="mb-2 block text-sm font-medium">Začiatok</label>
-          <input className="w-full rounded-lg border border-black/15 px-4 py-3" type="datetime-local" value={startAt} onChange={(e) => setStartAt(e.target.value)} required />
+          <input className="w-full border border-black/15 px-4 py-3" type="datetime-local" value={startAt} onChange={(e) => setStartAt(e.target.value)} required />
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium">Koniec</label>
-          <input className="w-full rounded-lg border border-black/15 px-4 py-3" type="datetime-local" value={endAt} onChange={(e) => setEndAt(e.target.value)} />
+          <input className="w-full border border-black/15 px-4 py-3" type="datetime-local" value={endAt} onChange={(e) => setEndAt(e.target.value)} />
           <p className="mt-2 text-sm text-black/55">Voliteľné pre viacdňové podujatia.</p>
         </div>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        <div className="space-y-3 rounded-xl border border-black/10 p-4">
+        <div className="space-y-3 border border-black/10 p-4">
           <div>
             <label className="mb-2 block text-sm font-medium">Plagát podujatia</label>
             <input
-              className="w-full rounded-lg border border-black/15 px-4 py-3"
+              className="w-full border border-black/15 px-4 py-3"
               type="file"
               accept="image/jpeg,image/png,image/webp"
               onChange={(e) => e.target.files?.[0] && uploadImage(e.target.files[0], 'poster')}
             />
             <p className="mt-2 text-sm text-black/55">Povinný obrázok. Uloží sa ako WebP bez orezania, max. šírka 1080 px.</p>
           </div>
-          <p className="rounded-lg bg-ink px-4 py-2 text-sm font-medium text-white">
+          <p className="bg-ink px-4 py-2 text-sm font-medium text-white">
             {uploadingImage === 'poster' ? 'Nahrávam plagát…' : posterImageUrl ? 'Plagát nahratý' : 'Nahrajte plagát'}
           </p>
           {posterImageUrl ? (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-ink">
+            <div className="relative aspect-[4/5] overflow-hidden bg-ink">
               <img src={posterImageUrl} alt="Plagát" className="h-full w-full object-contain" />
             </div>
           ) : null}
         </div>
 
-        <div className="space-y-3 rounded-xl border border-black/10 p-4">
+        <div className="space-y-3 border border-black/10 p-4">
           <div>
             <label className="mb-2 block text-sm font-medium">Cover vizuál</label>
             <input
-              className="w-full rounded-lg border border-black/15 px-4 py-3"
+              className="w-full border border-black/15 px-4 py-3"
               type="file"
               accept="image/jpeg,image/png,image/webp"
               onChange={(e) => e.target.files?.[0] && uploadImage(e.target.files[0], 'cover')}
             />
             <p className="mt-2 text-sm text-black/55">Voliteľný široký obrázok pre zvýraznené podujatie. Uloží sa ako WebP bez orezania, max. šírka 1600 px.</p>
           </div>
-          <p className="rounded-lg bg-ink px-4 py-2 text-sm font-medium text-white">
+          <p className="bg-ink px-4 py-2 text-sm font-medium text-white">
             {uploadingImage === 'cover' ? 'Nahrávam cover…' : coverImageUrl ? 'Cover nahratý' : 'Cover je voliteľný'}
           </p>
           {coverImageUrl ? (
-            <div className="relative aspect-video overflow-hidden rounded-xl bg-ink">
+            <div className="relative aspect-video overflow-hidden bg-ink">
               <img src={coverImageUrl} alt="Cover" className="h-full w-full object-contain" />
             </div>
           ) : null}
@@ -296,12 +296,12 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
 
       <div>
         <label className="mb-2 block text-sm font-medium">Krátky popis</label>
-        <textarea className="min-h-28 w-full rounded-lg border border-black/15 px-4 py-3" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <textarea className="min-h-28 w-full border border-black/15 px-4 py-3" value={description} onChange={(e) => setDescription(e.target.value)} />
       </div>
 
       <div>
         <label className="mb-2 block text-sm font-medium">Link na vstupenky / viac info</label>
-        <input className="w-full rounded-lg border border-black/15 px-4 py-3" value={ticketUrl} onChange={(e) => setTicketUrl(e.target.value)} placeholder="https://" />
+        <input className="w-full border border-black/15 px-4 py-3" value={ticketUrl} onChange={(e) => setTicketUrl(e.target.value)} placeholder="https://" />
       </div>
 
       <div className="flex flex-wrap gap-4">
@@ -309,11 +309,11 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} /> Pripnúť navrch</label>
       </div>
 
-      {error ? <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
+      {error ? <p className="bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
 
       <div className="flex flex-col gap-3 md:flex-row">
-        <button disabled={saving} className="rounded-lg bg-ink px-5 py-3 font-medium text-white transition hover:bg-accent disabled:opacity-50">{saving ? 'Ukladám…' : 'Uložiť'}</button>
-        {event?.id ? <button type="button" onClick={remove} className="rounded-lg border border-red-300 px-5 py-3 font-medium text-red-700 transition hover:bg-red-50">Zmazať</button> : null}
+        <button disabled={saving} className="bg-ink px-5 py-3 font-medium text-white transition hover:bg-accent disabled:opacity-50">{saving ? 'Ukladám…' : 'Uložiť'}</button>
+        {event?.id ? <button type="button" onClick={remove} className="border border-red-300 px-5 py-3 font-medium text-red-700 transition hover:bg-red-50">Zmazať</button> : null}
       </div>
     </form>
   );

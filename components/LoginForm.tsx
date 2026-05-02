@@ -34,12 +34,12 @@ export function LoginForm({ error }: { error?: string }) {
 
   return (
     <main className="flex min-h-screen items-center justify-center px-5">
-      <form onSubmit={login} className="w-full max-w-md rounded-lg bg-white p-8 shadow-sm">
+      <form onSubmit={login} className="w-full max-w-md bg-white p-8 shadow-sm">
         <h1 className="mb-2 text-3xl font-semibold">Admin login</h1>
         <p className="mb-6 text-sm text-black/60">Zadajte email administrátora.</p>
-        {errorMessage ? <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{errorMessage}</p> : null}
-        <input className="mb-4 w-full rounded-lg border border-black/15 px-4 py-3" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required />
-        <button disabled={!supabaseReady} className="w-full rounded-lg bg-ink px-4 py-3 font-medium text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50">Poslať prihlasovací odkaz</button>
+        {errorMessage ? <p className="mb-4 bg-red-50 p-3 text-sm text-red-700">{errorMessage}</p> : null}
+        <input className="mb-4 w-full border border-black/15 px-4 py-3" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" required />
+        <button disabled={!supabaseReady} className="w-full bg-ink px-4 py-3 font-medium text-white transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50">Poslať prihlasovací odkaz</button>
         {message ? <p className="mt-4 text-sm text-black/60">{message}</p> : null}
       </form>
     </main>
