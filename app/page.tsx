@@ -1,7 +1,7 @@
 import { Hero } from '@/components/Hero';
 import { EventsSection } from '@/components/EventsSection';
-import { InfoSections } from '@/components/InfoSections';
-import { AboutAmphitheatre, FaqSection, HomepageIntro } from '@/components/SeoSections';
+import { AtmosphereGallery, InfoSections } from '@/components/InfoSections';
+import { HomepageIntro } from '@/components/SeoSections';
 import { getEvents } from '@/lib/events';
 import { buildStructuredData } from '@/lib/seo';
 
@@ -14,10 +14,9 @@ export default async function HomePage() {
   return (
     <main>
       <Hero hasArchive={archive.length > 0} />
-      <HomepageIntro />
       <EventsSection upcoming={upcoming} archive={archive} />
-      <AboutAmphitheatre />
-      <FaqSection />
+      <HomepageIntro />
+      <AtmosphereGallery />
       <InfoSections />
       <script
         type="application/ld+json"

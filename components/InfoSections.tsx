@@ -1,5 +1,36 @@
 import Image from 'next/image';
 
+export function AtmosphereGallery() {
+  return (
+    <section id="atmosfera" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16" aria-labelledby="atmosphere-title">
+      <div className="mb-8 max-w-3xl">
+        <p className="mb-2 text-sm uppercase tracking-[0.25em] text-black/45">Fotogaléria / atmosféra</p>
+        <h2 id="atmosphere-title" className="text-3xl font-semibold md:text-5xl">Priestor pod holým nebom</h2>
+      </div>
+      <div className="grid gap-5 md:grid-cols-[1.25fr_0.75fr]">
+        <div className="relative aspect-[16/10] overflow-hidden bg-black/5">
+          <Image
+            src="/assets/hero_1.webp"
+            alt="Open-air kultúrny priestor Amfiteáter Prešov počas podujatia"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 62vw"
+          />
+        </div>
+        <div className="relative aspect-[4/5] overflow-hidden bg-black/5">
+          <Image
+            src="/assets/historia.webp"
+            alt="Historická atmosféra Amfiteátra Prešov"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 36vw"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function InfoSections() {
   const currentYear = new Date().getFullYear();
 
@@ -32,9 +63,26 @@ export function InfoSections() {
         </div>
       </section>
 
+      <section id="prenajom" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16" aria-labelledby="rental-title">
+        <div className="grid gap-8 border-t border-black/10 pt-10 md:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="mb-2 text-sm uppercase tracking-[0.25em] text-accent">Prenájom</p>
+            <h2 id="rental-title" className="text-3xl font-semibold md:text-5xl">Prenájom amfiteátra</h2>
+          </div>
+          <div className="space-y-4 leading-7 text-black/65">
+            <p>Amfiteáter je dostupný aj pre veľké kultúrne, spoločenské a komunitné podujatia v open-air priestore priamo v Prešove.</p>
+            <div className="pt-2">
+              <p className="font-medium text-black">Miro Tásler</p>
+              <p><a className="transition hover:text-accent" href="mailto:info@amfiteaterpresov.sk">info@amfiteaterpresov.sk</a></p>
+              <p><a className="transition hover:text-accent" href="tel:+421905273318">+421 905 273 318</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <footer id="kontakt" className="bg-ink px-5 py-16 text-white md:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-10 md:grid-cols-2">
+          <div className="max-w-3xl">
             <div>
               <p className="mb-2 text-sm uppercase tracking-[0.25em] text-white/45">Administratívny kontakt</p>
               <div className="space-y-2 text-white/72">
@@ -43,14 +91,6 @@ export function InfoSections() {
                 <p>08001 Prešov</p>
                 <p>Slovakia</p>
                 <p><a className="transition hover:text-accent" href="mailto:info@amfiteaterpresov.sk">info@amfiteaterpresov.sk</a></p>
-              </div>
-            </div>
-            <div>
-              <p className="mb-2 text-sm uppercase tracking-[0.25em] text-white/45">Prenájom amfiteátra</p>
-              <div className="space-y-2 text-white/72">
-                <p className="font-medium text-white">Miro Tásler</p>
-                <p><a className="transition hover:text-accent" href="mailto:info@amfiteaterpresov.sk">info@amfiteaterpresov.sk</a></p>
-                <p><a className="transition hover:text-accent" href="tel:+421905273318">+421 905 273 318</a></p>
               </div>
             </div>
           </div>
