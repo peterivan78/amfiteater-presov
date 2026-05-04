@@ -101,12 +101,22 @@ function validateImage(file: File) {
   return '';
 }
 
+function toDatetimeLocalValue(value?: string | null) {
+  if (!value) return '';
+
+  const date = new Date(value);
+  const offset = date.getTimezoneOffset();
+  const localDate = new Date(date.getTime() - offset * 60 * 1000);
+
+  return localDate.toISOString().slice(0, 16);
+}
+
 export function AdminEventForm({ event }: { event?: EventItem }) {
   const router = useRouter();
   const supabaseReady = hasSupabaseEnv();
   const [title, setTitle] = useState(event?.title ?? '');
-  const [startAt, setStartAt] = useState(event?.start_at ? event.start_at.slice(0, 16) : '');
-  const [endAt, setEndAt] = useState(event?.end_at ? event.end_at.slice(0, 16) : '');
+  const [startAt, setStartAt] = useState(toDatetimeLocalValue(event?.start_at));
+  const [endAt, setEndAt] = useState(toDatetimeLocalValue(event?.end_at));
   const [posterImageUrl, setPosterImageUrl] = useState(event?.image_url ?? '');
   const [coverImageUrl, setCoverImageUrl] = useState(event?.cover_image_url ?? '');
   const [description, setDescription] = useState(event?.short_description ?? '');

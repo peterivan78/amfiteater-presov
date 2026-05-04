@@ -27,7 +27,7 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
             <p className="mb-5 text-sm uppercase tracking-[0.25em] text-white/45">Highlight sezóny</p>
             <div className="mb-5 flex items-start gap-2 text-sm text-white/65">
               <CalendarDays className="mt-0.5 h-4 w-4" />
-              <span>{event.display_date ?? formatEventDateRange(event.start_at, event.end_at)}</span>
+              <span>{formatEventDateRange(event.start_at, event.end_at)}</span>
             </div>
             <h3 className="text-4xl font-semibold leading-tight md:text-6xl">
               <a className="transition hover:text-accent" href={eventPath(event)}>{event.title}</a>

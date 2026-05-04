@@ -1,19 +1,22 @@
 import type { EventItem } from '@/lib/types';
 import { eventPath } from '@/lib/seo';
+import { siteTimeZone } from '@/lib/utils';
 
 export function getLineupDate(event: EventItem) {
   const start = new Date(event.start_at);
   const end = event.end_at ? new Date(event.end_at) : null;
-  const day = end && start.toDateString() !== end.toDateString() ? `${String(start.getDate()).padStart(2, '0')}–${String(end.getDate()).padStart(2, '0')}` : String(start.getDate()).padStart(2, '0');
-  const month = new Intl.DateTimeFormat('sk-SK', { month: 'short' }).format(start).replace('.', '');
+  const dayFormatter = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, day: '2-digit' });
+  const dayKeyFormatter = new Intl.DateTimeFormat('en-CA', { timeZone: siteTimeZone, year: 'numeric', month: '2-digit', day: '2-digit' });
+  const day = end && dayKeyFormatter.format(start) !== dayKeyFormatter.format(end) ? `${dayFormatter.format(start)}–${dayFormatter.format(end)}` : dayFormatter.format(start);
+  const month = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, month: 'short' }).format(start).replace('.', '');
 
   return { day, month };
 }
 
 function getLineupMeta(event: EventItem) {
   const start = new Date(event.start_at);
-  const time = new Intl.DateTimeFormat('sk-SK', { hour: '2-digit', minute: '2-digit' }).format(start);
-  const weekday = new Intl.DateTimeFormat('sk-SK', { weekday: 'long' }).format(start);
+  const time = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, hour: '2-digit', minute: '2-digit' }).format(start);
+  const weekday = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, weekday: 'long' }).format(start);
   const type = event.title.toLowerCase().includes('kavej') ? 'kino' : event.title.toLowerCase().includes('na skle') ? 'divadlo' : event.title.toLowerCase().includes('žije') ? 'festival' : 'koncert';
 
   return { weekday, time, type };

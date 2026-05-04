@@ -5,6 +5,7 @@ import { getAllPublishedEvents } from '@/lib/events';
 import { eventPath, siteUrl } from '@/lib/seo';
 import type { EventItem } from '@/lib/types';
 import { nbsp } from '@/lib/typography';
+import { siteTimeZone } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
 
 function getProgramMeta(event: EventItem) {
   const start = new Date(event.start_at);
-  const weekday = new Intl.DateTimeFormat('sk-SK', { weekday: 'long' }).format(start);
-  const time = new Intl.DateTimeFormat('sk-SK', { hour: '2-digit', minute: '2-digit' }).format(start);
+  const weekday = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, weekday: 'long' }).format(start);
+  const time = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, hour: '2-digit', minute: '2-digit' }).format(start);
   const type = event.title.toLowerCase().includes('kavej') ? 'kino' : event.title.toLowerCase().includes('na skle') ? 'divadlo' : event.title.toLowerCase().includes('žije') ? 'festival' : 'koncert';
 
   return { weekday, time, type };

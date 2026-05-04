@@ -91,7 +91,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
             <dl className="mt-8 space-y-4 text-sm">
               <div>
                 <dt className="text-black/45">Dátum a čas</dt>
-                <dd className="mt-1 text-base text-black/75">{event.display_date ?? formatEventDateRange(event.start_at, event.end_at)}</dd>
+                <dd className="mt-1 text-base text-black/75">{formatEventDateRange(event.start_at, event.end_at)}</dd>
               </div>
               <div>
                 <dt className="text-black/45">Miesto</dt>

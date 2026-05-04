@@ -66,7 +66,7 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
             <div className="divide-y divide-ink/10 border-y border-ink/10">
               {archive.map((event) => (
                 <div key={event.id} className="grid gap-2 py-5 transition hover:bg-ink/[0.025] md:grid-cols-[180px_1fr] md:items-center">
-                  <p className="text-sm text-ink/55">{event.display_date ?? formatEventDateRange(event.start_at, event.end_at)}</p>
+                  <p className="text-sm text-ink/55">{formatEventDateRange(event.start_at, event.end_at)}</p>
                   <div>
                     <h3 className="font-semibold">
                       <a className="transition hover:text-accent" href={eventPath(event)}>{event.title}</a>
