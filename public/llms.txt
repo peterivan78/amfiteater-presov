@@ -15,5 +15,5 @@ https://amfiteater-presov.vercel.app/
 
 ## Recommended pages
 - Homepage: https://amfiteater-presov.vercel.app/
-- Program: https://amfiteater-presov.vercel.app/#program
+- Program: https://amfiteater-presov.vercel.app/program
 - Kontakt: https://amfiteater-presov.vercel.app/#kontakt

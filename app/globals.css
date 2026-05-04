@@ -12,9 +12,10 @@ html {
 
 body {
   margin: 0;
-  background: #f6f1e8;
+  background: #F2EFE8;
   color: #111111;
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: geometricPrecision;
 }
 
 a {
@@ -23,9 +24,9 @@ a {
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display), Impact, sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 650;
+  letter-spacing: -0.035em;
 }
 
 input, textarea, button {
@@ -33,7 +34,7 @@ input, textarea, button {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes v2-reveal-up {
+  @keyframes reveal-up {
     from {
       opacity: 0;
       transform: translateY(26px);
@@ -44,7 +45,7 @@ input, textarea, button {
     }
   }
 
-  @keyframes v2-slow-drift {
+  @keyframes slow-drift {
     from {
       transform: scale(1.04) translateY(0);
     }
@@ -53,13 +54,13 @@ input, textarea, button {
     }
   }
 
-  .v2-scroll-reveal {
-    animation: v2-reveal-up 0.9s ease-out both;
+  .scroll-reveal {
+    animation: reveal-up 0.9s ease-out both;
     animation-timeline: view();
     animation-range: entry 0% cover 32%;
   }
 
-  .v2-image-drift {
-    animation: v2-slow-drift 18s ease-in-out infinite alternate;
+  .image-drift {
+    animation: slow-drift 18s ease-in-out infinite alternate;
   }
 }

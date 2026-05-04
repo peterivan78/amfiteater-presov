@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getEventBySlug } from '@/lib/events';
 import { buildEventStructuredData, eventDescription, eventUrl } from '@/lib/seo';
+import { nbsp } from '@/lib/typography';
 import { formatEventDateRange } from '@/lib/utils';
 
 type EventPageProps = {
@@ -97,11 +98,11 @@ export default async function EventDetailPage({ params }: EventPageProps) {
                 <dd className="mt-1 text-base text-black/75">Amfiteáter Prešov</dd>
               </div>
             </dl>
-            {event.short_description ? <p className="mt-8 text-lg leading-8 text-black/70">{event.short_description}</p> : null}
+            {event.short_description ? <p className="mt-8 text-lg leading-8 text-black/70">{nbsp(event.short_description)}</p> : null}
             <section className="mt-10 border-t border-black/10 pt-6" aria-labelledby="prakticke-informacie">
               <h2 id="prakticke-informacie" className="text-2xl font-semibold">Praktické informácie</h2>
               <p className="mt-3 leading-7 text-black/65">
-                Podujatie sa koná v open-air priestore Amfiteáter Prešov. Aktuálne informácie sledujte pri podujatí a na oficiálnych predajných miestach vstupeniek, ak sú dostupné.
+                {nbsp('Podujatie sa koná v open-air priestore Amfiteáter Prešov. Aktuálne informácie sledujte pri podujatí a na oficiálnych predajných miestach vstupeniek, ak sú dostupné.')}
               </p>
             </section>
             {event.ticket_url ? (

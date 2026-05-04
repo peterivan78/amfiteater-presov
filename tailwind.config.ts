@@ -6,12 +6,17 @@ const config: Config = {
     extend: {
       colors: {
         ink: '#111111',
-        paper: '#f6f1e8',
-        accent: '#c9492e'
+        paper: '#F2EFE8',
+        olive: '#313223',
+        'olive-dust': '#737663',
+        concrete: '#B7AEA2',
+        rust: '#6D4B3E',
+        footer: '#1e1f18',
+        accent: '#C8A46B'
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'Impact', 'sans-serif']
+        display: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif']
       }
     }
   },

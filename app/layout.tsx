@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
-import { Bebas_Neue, Manrope } from 'next/font/google';
+import { Geist, Inter } from 'next/font/google';
 import { siteHomeUrl, siteUrl } from '@/lib/seo';
 import './globals.css';
 
-const bebasNeue = Bebas_Neue({
+const geist = Geist({
   subsets: ['latin', 'latin-ext'],
-  weight: '400',
   variable: '--font-display'
 });
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-sans'
 });
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
     description: 'Oficiálny program Amfiteátra Prešov. Koncerty, festivaly, letné kino a kultúrne podujatia pod holým nebom v Prešove.',
     images: [
       {
-        url: '/assets/hero_1.webp',
+        url: '/assets/Amfiteater-Presov-pohlad-na-amfiteater-by-Peter-Ivan-XH24392_v4.webp',
         width: 1200,
         height: 630,
         alt: 'Amfiteáter Prešov pod holým nebom'
@@ -49,13 +48,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Amfiteáter Prešov – koncerty, festivaly a kultúrne podujatia',
     description: 'Oficiálny program Amfiteátra Prešov. Koncerty, festivaly, letné kino a kultúrne podujatia pod holým nebom v Prešove.',
-    images: ['/assets/hero_1.webp']
+    images: ['/assets/Amfiteater-Presov-pohlad-na-amfiteater-by-Peter-Ivan-XH24392_v4.webp']
   }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="sk" className={`${bebasNeue.variable} ${manrope.variable}`}>
+    <html lang="sk" className={`${geist.variable} ${inter.variable}`}>
       <body className="font-sans">{children}</body>
     </html>
   );

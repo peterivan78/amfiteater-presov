@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 type GalleryImage = {
   src: string;
@@ -10,8 +11,13 @@ type GalleryImage = {
 
 export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const activeImage = activeIndex === null ? null : images[activeIndex];
   const activePosition = activeIndex === null ? 0 : activeIndex + 1;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (activeIndex === null) return;
@@ -41,14 +47,14 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-6 md:gap-3">
+      <div className={['grid grid-cols-2 gap-2 transition duration-300 md:grid-cols-6 md:gap-3', activeImage ? 'blur-sm brightness-50' : ''].join(' ')}>
         {images.map((image, index) => (
           <button
             key={image.src}
             type="button"
             onClick={() => setActiveIndex(index)}
             className={[
-              'group relative block overflow-hidden bg-[#B7AEA2]/30 text-left transition hover:bg-[#B7AEA2]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6D4B3E]',
+              'group relative block overflow-hidden bg-concrete/30 text-left transition hover:bg-concrete/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rust',
               index === 0 ? 'col-span-2 aspect-[16/9] md:col-span-1 md:aspect-[4/3]' : 'aspect-[4/3]'
             ].join(' ')}
             aria-label={`Otvoriť fotografiu: ${image.alt}`}
@@ -64,9 +70,15 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
         ))}
       </div>
 
-      {activeImage ? (
+      {activeImage && isMounted ? createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#111111]/94 px-4 py-6 text-[#F5F1E8] md:px-8"
+          className="flex items-center justify-center px-4 py-6 text-[#F5F1E8] md:px-8"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 2147483647,
+            background: 'rgba(17, 17, 17, 0.96)'
+          }}
           role="dialog"
           aria-modal="true"
           aria-label="Fotogaléria Amfiteáter Prešov"
@@ -77,14 +89,14 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
           <button
             type="button"
             onClick={() => setActiveIndex(null)}
-            className="absolute right-4 top-4 z-10 border border-[#F5F1E8]/25 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.22em] transition hover:border-[#C8A46B] hover:text-[#C8A46B] md:right-8 md:top-8"
+            className="absolute right-4 top-4 z-20 bg-[#F5F1E8] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition hover:bg-accent md:right-8 md:top-8"
           >
             Zavrieť
           </button>
           <button
             type="button"
             onClick={showPrevious}
-            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 text-4xl leading-none text-[#F5F1E8]/70 transition hover:text-[#C8A46B] md:left-8"
+            className="absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-[#F5F1E8] text-3xl leading-none text-ink transition hover:bg-accent md:left-8"
             aria-label="Predchádzajúca fotografia"
           >
             ←
@@ -92,19 +104,29 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
           <button
             type="button"
             onClick={showNext}
-            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 text-4xl leading-none text-[#F5F1E8]/70 transition hover:text-[#C8A46B] md:right-8"
+            className="absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-[#F5F1E8] text-3xl leading-none text-ink transition hover:bg-accent md:right-8"
             aria-label="Ďalšia fotografia"
           >
             →
           </button>
-          <div className="relative h-[78vh] w-full max-w-6xl">
-            <Image src={activeImage.src} alt={activeImage.alt} fill className="object-contain" sizes="100vw" priority />
+          <div className="flex h-[88vh] w-full max-w-7xl flex-col justify-center gap-4">
+            <div className="relative min-h-0 flex-1">
+              <Image
+                src={activeImage.src}
+                alt={activeImage.alt}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            </div>
+            <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 text-center text-xs text-[#F5F1E8]/82 md:flex-row md:justify-center md:gap-4">
+              <span className="font-semibold uppercase tracking-[0.18em]">{activePosition} / {images.length}</span>
+              <span className="text-sm leading-6">{activeImage.alt}</span>
+            </div>
           </div>
-          <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-4 text-center text-xs uppercase tracking-[0.18em] text-[#F5F1E8]/62">
-            <span>{activePosition} / {images.length}</span>
-            <span className="hidden max-w-xl normal-case tracking-normal md:inline">{activeImage.alt}</span>
-          </div>
-        </div>
+        </div>,
+        document.body
       ) : null}
     </>
   );
