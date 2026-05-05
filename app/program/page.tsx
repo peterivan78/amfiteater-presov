@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getLineupDate } from '@/components/EventCard';
 import { getAllPublishedEvents } from '@/lib/events';
-import { eventPath, siteUrl } from '@/lib/seo';
+import { eventImageAlt, eventPath, siteUrl } from '@/lib/seo';
 import type { EventItem } from '@/lib/types';
 import { nbsp } from '@/lib/typography';
 import { siteTimeZone } from '@/lib/utils';
@@ -39,7 +40,7 @@ function ProgramVisualCard({ event }: { event: EventItem }) {
       <a className="relative mb-5 aspect-[4/5] overflow-hidden bg-ink/10 md:mb-0" href={eventPath(event)} aria-label={`Detail podujatia ${event.title}`}>
         <Image
           src={event.image_url}
-          alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
+          alt={eventImageAlt(event)}
           fill
           className="object-contain transition duration-500 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, 220px"
@@ -89,7 +90,7 @@ export default async function ProgramPage() {
     <main className="min-h-screen bg-paper text-ink">
       <section className="mx-auto max-w-7xl px-5 py-8 md:px-8 md:py-10">
         <nav className="mb-16 flex items-start justify-between gap-6 text-[11px] font-semibold uppercase tracking-[0.22em]">
-          <a href="/" className="flex items-center" aria-label="Amfiteáter Prešov">
+          <Link href="/" className="flex items-center" aria-label="Amfiteáter Prešov">
             <Image
               src="/assets/logo.svg"
               alt="Amfiteáter Prešov"
@@ -97,12 +98,12 @@ export default async function ProgramPage() {
               height={60}
               className="h-10 w-auto"
             />
-          </a>
+          </Link>
           <div className="hidden items-center gap-8 md:flex">
-            <a className="transition hover:text-rust" href="/#program">Program</a>
-            <a className="transition hover:text-rust" href="/#o-amfiteatri">O amfiteátri</a>
-            <a className="transition hover:text-rust" href="/#prenajom">Prenájom</a>
-            <a className="transition hover:text-rust" href="/#kontakt">Kontakt</a>
+            <Link className="transition hover:text-rust" href="/#program">Program</Link>
+            <Link className="transition hover:text-rust" href="/#o-amfiteatri">O amfiteátri</Link>
+            <Link className="transition hover:text-rust" href="/#prenajom">Prenájom</Link>
+            <Link className="transition hover:text-rust" href="/#kontakt">Kontakt</Link>
           </div>
         </nav>
 
@@ -134,8 +135,8 @@ export default async function ProgramPage() {
             </div>
           </div>
           <div className="flex gap-5 text-[#F5F1E8]/62">
-            <a className="transition hover:text-accent" href="/">Domov</a>
-            <a className="transition hover:text-accent" href="/#prenajom">Prenájom</a>
+            <Link className="transition hover:text-accent" href="/">Domov</Link>
+            <Link className="transition hover:text-accent" href="/#prenajom">Prenájom</Link>
           </div>
           <div className="text-sm text-[#F5F1E8]/45 md:text-right">Copyright {currentYear} Amfiteáter Prešov. Made by PI LAB</div>
         </div>

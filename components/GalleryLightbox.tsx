@@ -11,13 +11,8 @@ type GalleryImage = {
 
 export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
   const activeImage = activeIndex === null ? null : images[activeIndex];
   const activePosition = activeIndex === null ? 0 : activeIndex + 1;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     if (activeIndex === null) return;
@@ -70,7 +65,7 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
         ))}
       </div>
 
-      {activeImage && isMounted ? createPortal(
+      {activeImage ? createPortal(
         <div
           className="flex items-center justify-center px-4 py-6 text-[#F5F1E8] md:px-8"
           style={{

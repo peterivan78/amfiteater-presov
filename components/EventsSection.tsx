@@ -48,6 +48,9 @@ export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; ar
               <p className="mt-5 max-w-xl leading-7 text-[#F5F1E8]/72">
                 {nbsp('Program Amfiteátra Prešov prináša koncerty, festivaly, filmové premietania a špeciálne kultúrne podujatia počas celej sezóny.')}
               </p>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-[#F5F1E8]/62">
+                {nbsp('Amfiteáter Prešov je open-air kultúrny priestor pre koncerty, festivaly, letné kino a komunitné podujatia v Prešove. Počas sezóny prináša program pod holým nebom v areáli, ktorý spája mestskú dostupnosť, parkovú atmosféru a históriu jedného z najvýraznejších kultúrnych miest v meste.')}
+              </p>
             </div>
           </div>
         </div>

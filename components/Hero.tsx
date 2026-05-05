@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { nbsp } from '@/lib/typography';
 
 export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
@@ -19,7 +20,7 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
 
         <div className="absolute inset-0 z-10 mx-auto flex max-w-7xl flex-col justify-between px-5 py-5 md:px-8 md:py-7">
           <nav className="flex items-start justify-between gap-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#F5F1E8] md:text-[11px]">
-          <a href="/" className="flex items-center" aria-label="Amfiteáter Prešov">
+          <Link href="/" className="flex items-center" aria-label="Amfiteáter Prešov">
             <Image
               src="/assets/logo.svg"
               alt="Amfiteáter Prešov"
@@ -27,7 +28,7 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
               height={60}
               className="h-9 w-auto brightness-0 invert md:h-12"
             />
-          </a>
+          </Link>
           <div className="hidden items-center gap-10 md:flex">
             <a className="transition hover:text-accent" href="#program">Program</a>
             <a className="transition hover:text-accent" href="#o-amfiteatri">O amfiteátri</a>

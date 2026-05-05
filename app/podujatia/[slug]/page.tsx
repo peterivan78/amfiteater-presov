@@ -1,10 +1,20 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getEventBySlug } from '@/lib/events';
-import { buildEventStructuredData, eventDescription, eventUrl } from '@/lib/seo';
+import {
+  buildEventStructuredData,
+  eventAboutParagraphs,
+  eventImageAlt,
+  eventMetaDescription,
+  eventMetaTitle,
+  eventType,
+  eventUrl
+} from '@/lib/seo';
 import { nbsp } from '@/lib/typography';
-import { formatEventDateRange } from '@/lib/utils';
+import type { EventItem } from '@/lib/types';
+import { formatDateTime, formatEventDateRange } from '@/lib/utils';
 
 type EventPageProps = {
   params: Promise<{
@@ -14,6 +24,35 @@ type EventPageProps = {
 
 export const dynamic = 'force-dynamic';
 
+function capitalizeFirst(value: string) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function buildEventFaq(event: EventItem) {
+  const type = eventType(event);
+
+  return [
+    {
+      question: 'Kde sa podujatie koná?',
+      answer: 'Podujatie sa koná v priestore Amfiteáter Prešov.'
+    },
+    {
+      question: 'Kedy sa podujatie začína?',
+      answer: `${capitalizeFirst(type)} ${event.title} sa začína ${formatDateTime(event.start_at)}.`
+    },
+    {
+      question: 'Kde nájdem vstupenky?',
+      answer: event.ticket_url
+        ? 'Vstupenky sú dostupné cez odkaz „Vstupenky / viac info“, ak je pri podujatí uvedený.'
+        : 'Ak sú vstupenky dostupné, nájdete ich pri podujatí alebo na oficiálnom predajnom mieste.'
+    },
+    {
+      question: 'Je podujatie vonku?',
+      answer: 'Áno, ide o open-air podujatie v Amfiteátri Prešov.'
+    }
+  ];
+}
+
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
   const { slug } = await params;
   const event = await getEventBySlug(slug);
@@ -22,10 +61,11 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
     return {};
   }
 
-  const title = `${event.title} – Amfiteáter Prešov`;
-  const description = eventDescription(event);
+  const title = eventMetaTitle(event);
+  const description = eventMetaDescription(event);
   const url = eventUrl(event);
   const image = event.cover_image_url || event.image_url;
+  const imageAlt = eventImageAlt(event);
 
   return {
     title,
@@ -43,7 +83,7 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
       images: [
         {
           url: image,
-          alt: `Vizuál podujatia ${event.title} v Amfiteátri Prešov`
+          alt: imageAlt
         }
       ]
     },
@@ -65,20 +105,37 @@ export default async function EventDetailPage({ params }: EventPageProps) {
   }
 
   const image = event.cover_image_url || event.image_url;
+  const imageAlt = eventImageAlt(event);
+  const aboutParagraphs = eventAboutParagraphs(event);
+  const faqItems = buildEventFaq(event);
   const structuredData = {
     '@context': 'https://schema.org',
-    ...buildEventStructuredData(event)
+    '@graph': [
+      buildEventStructuredData(event),
+      {
+        '@type': 'FAQPage',
+        '@id': `${eventUrl(event)}#faq`,
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer
+          }
+        }))
+      }
+    ]
   };
 
   return (
     <main>
       <article className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-16">
-        <a className="text-sm text-black/55 transition hover:text-accent" href="/#program">Späť na program</a>
+        <Link className="text-sm text-black/55 transition hover:text-accent" href="/#program">Späť na program</Link>
         <div className="mt-8 grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-start">
           <div className="relative aspect-[4/5] overflow-hidden bg-ink">
             <Image
               src={image}
-              alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
+              alt={imageAlt}
               fill
               className="object-contain"
               sizes="(max-width: 768px) 100vw, 44vw"
@@ -99,11 +156,30 @@ export default async function EventDetailPage({ params }: EventPageProps) {
               </div>
             </dl>
             {event.short_description ? <p className="mt-8 text-lg leading-8 text-black/70">{nbsp(event.short_description)}</p> : null}
+            <section className="mt-10 border-t border-black/10 pt-6" aria-labelledby="o-podujati">
+              <h2 id="o-podujati" className="text-2xl font-semibold">O podujatí</h2>
+              <div className="mt-4 space-y-4 leading-7 text-black/65">
+                {aboutParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{nbsp(paragraph)}</p>
+                ))}
+              </div>
+            </section>
             <section className="mt-10 border-t border-black/10 pt-6" aria-labelledby="prakticke-informacie">
               <h2 id="prakticke-informacie" className="text-2xl font-semibold">Praktické informácie</h2>
               <p className="mt-3 leading-7 text-black/65">
-                {nbsp('Podujatie sa koná v open-air priestore Amfiteáter Prešov. Aktuálne informácie sledujte pri podujatí a na oficiálnych predajných miestach vstupeniek, ak sú dostupné.')}
+                {nbsp('Podujatie sa koná v open-air priestore Amfiteáter Prešov. Pred návštevou odporúčame skontrolovať aktuálne informácie pri konkrétnom podujatí a na oficiálnom predajnom mieste vstupeniek. V prípade nepriaznivého počasia sledujte pokyny organizátora.')}
               </p>
+            </section>
+            <section className="mt-8 border-t border-black/10 pt-6" aria-labelledby="casto-kladene-otazky">
+              <h2 id="casto-kladene-otazky" className="text-2xl font-semibold">Často kladené otázky</h2>
+              <div className="mt-4 divide-y divide-black/10 border-y border-black/10">
+                {faqItems.map((item) => (
+                  <div key={item.question} className="py-4">
+                    <h3 className="text-sm font-semibold">{item.question}</h3>
+                    <p className="mt-2 text-sm leading-6 text-black/62">{nbsp(item.answer)}</p>
+                  </div>
+                ))}
+              </div>
             </section>
             {event.ticket_url ? (
               <section className="mt-8 border-t border-black/10 pt-6" aria-labelledby="vstupenky">
@@ -113,6 +189,10 @@ export default async function EventDetailPage({ params }: EventPageProps) {
                 </a>
               </section>
             ) : null}
+            <nav className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-black/10 pt-6 text-sm text-black/55" aria-label="Súvisiace odkazy">
+              <Link className="transition hover:text-accent" href="/#program">Späť na program</Link>
+              <Link className="transition hover:text-accent" href="/program">Ďalšie podujatia v Amfiteátri Prešov</Link>
+            </nav>
           </div>
         </div>
       </article>

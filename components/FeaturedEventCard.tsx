@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { CalendarDays } from 'lucide-react';
 import type { EventItem } from '@/lib/types';
 import { formatEventDateRange } from '@/lib/utils';
-import { eventPath } from '@/lib/seo';
+import { eventImageAlt, eventPath } from '@/lib/seo';
 
 export function FeaturedEventCard({ event }: { event: EventItem }) {
   const imageUrl = event.cover_image_url || event.image_url;
@@ -14,7 +14,7 @@ export function FeaturedEventCard({ event }: { event: EventItem }) {
           <a href={eventPath(event)} aria-label={`Detail podujatia ${event.title}`}>
             <Image
               src={imageUrl}
-              alt={`Vizuál podujatia ${event.title} v Amfiteátri Prešov`}
+              alt={eventImageAlt(event)}
               fill
               className="object-contain transition duration-300 group-hover:scale-[1.01]"
               sizes="(max-width: 768px) 100vw, 58vw"

@@ -1,5 +1,5 @@
 import type { EventItem } from '@/lib/types';
-import { toSlug } from '@/lib/utils';
+import { siteTimeZone, toSlug } from '@/lib/utils';
 
 export const siteUrl = 'https://amfiteater-presov.vercel.app';
 export const siteHomeUrl = `${siteUrl}/`;
@@ -26,6 +26,83 @@ export function publicEventSlug(event: EventItem) {
   return `${baseSlug}-${year}`;
 }
 
+export function eventYear(event: EventItem) {
+  return new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, year: 'numeric' }).format(new Date(event.start_at));
+}
+
+export function eventType(event: EventItem) {
+  const title = event.title.toLowerCase();
+
+  if (title.includes('kavej') || title.includes('kino') || title.includes('film')) {
+    return 'letné kino';
+  }
+
+  if (title.includes('festival') || title.includes('žije') || title.includes('hip hop')) {
+    return 'festival';
+  }
+
+  return 'koncert';
+}
+
+export function eventImageAlt(event: EventItem) {
+  if (event.title.toLowerCase().includes('imt smile')) {
+    return 'IMT Smile koncert Amfiteáter Prešov 2026';
+  }
+
+  return `${event.title} Amfiteáter Prešov ${eventYear(event)}`;
+}
+
+export function eventMetaTitle(event: EventItem) {
+  if (event.title.toLowerCase().includes('imt smile')) {
+    return 'IMT Smile Prešov 2026 – koncert Amfiteáter Prešov';
+  }
+
+  return `${event.title} Prešov ${eventYear(event)} – Amfiteáter Prešov`;
+}
+
+export function eventMetaDescription(event: EventItem) {
+  return `${event.title} v Amfiteátri Prešov. Dátum, čas, miesto, vstupenky a praktické informácie k podujatiu.`;
+}
+
+export function eventAboutParagraphs(event: EventItem) {
+  const title = event.title;
+  const type = eventType(event);
+
+  if (title.toLowerCase().includes('imt smile')) {
+    return [
+      'IMT Smile sa vracajú do Prešova s letným open-air koncertom v priestore Amfiteáter Prešov. Domáce publikum, veľké pódium a atmosféra amfiteátra vytvárajú prirodzené miesto pre jeden z hlavných koncertov sezóny.',
+      'Koncert IMT Smile v Prešove sa uskutoční v piatok 26. júna 2026. Súčasťou večera budú aj hostia Kali a Peter Pann.'
+    ];
+  }
+
+  if (type === 'letné kino') {
+    return [
+      `${title} prináša do priestoru Amfiteáter Prešov letné kino pod holým nebom v meste Prešov. Filmový večer je súčasťou sezónneho programu, ktorý spája kino, parkovú atmosféru a mestskú dostupnosť.`,
+      `Letné kino ${title} v Prešove vytvára pokojný večerný formát pre návštevníkov, ktorí chcú zažiť film mimo klasickej kinosály priamo v open-air priestore Amfiteátra Prešov.`
+    ];
+  }
+
+  if (type === 'festival') {
+    return [
+      `${title} je festival v open-air priestore Amfiteáter Prešov v meste Prešov. Program využíva veľké pódium, letnú atmosféru a charakter amfiteátra ako prirodzeného miesta pre väčšie kultúrne podujatia.`,
+      `Festival ${title} v Prešove patrí medzi podujatia sezóny, pri ktorých Amfiteáter Prešov ponúka priestor pre hudbu, publikum a spoločný zážitok pod holým nebom.`
+    ];
+  }
+
+  return [
+    `${title} je koncert v priestore Amfiteáter Prešov v meste Prešov. Open-air prostredie amfiteátra dáva podujatiu letnú atmosféru a prirodzené zázemie pre večer pod holým nebom.`,
+    `Koncert ${title} v Prešove je súčasťou sezónneho programu, ktorý v Amfiteátri Prešov prepája hudbu, mestský park a kultúrny priestor s dlhou tradíciou.`
+  ];
+}
+
+export function eventPerformers(event: EventItem) {
+  if (event.title.toLowerCase().includes('imt smile')) {
+    return ['IMT Smile', 'Kali', 'Peter Pann'];
+  }
+
+  return [];
+}
+
 export const faqItems = [
   {
     question: 'Ako sa dostanem do Amfiteátra Prešov?',
@@ -50,10 +127,12 @@ export const faqItems = [
 ];
 
 export function eventDescription(event: EventItem) {
-  return event.short_description || `Podujatie ${event.title} v Amfiteátri Prešov.`;
+  return event.short_description || eventAboutParagraphs(event).join(' ');
 }
 
 export function buildEventStructuredData(event: EventItem) {
+  const performers = eventPerformers(event);
+
   return {
     '@type': 'Event',
     '@id': `${eventUrl(event)}#event`,
@@ -78,6 +157,14 @@ export function buildEventStructuredData(event: EventItem) {
     organizer: {
       '@id': organizationId
     },
+    ...(performers.length
+      ? {
+          performer: performers.map((name) => ({
+            '@type': name === 'IMT Smile' ? 'MusicGroup' : 'Person',
+            name
+          }))
+        }
+      : {}),
     ...(event.ticket_url
       ? {
           offers: {
@@ -117,7 +204,7 @@ export function buildStructuredData(events: EventItem[]) {
         }
       },
       {
-        '@type': 'Place',
+        '@type': ['Place', 'EventVenue'],
         '@id': placeId,
         name: 'Amfiteáter Prešov',
         description:

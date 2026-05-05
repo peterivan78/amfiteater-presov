@@ -20,6 +20,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.9
     },
+    {
+      url: `${siteHomeUrl}podujatia`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9
+    },
     ...events.map((event) => ({
       url: eventUrl(event),
       lastModified: new Date(event.updated_at),
