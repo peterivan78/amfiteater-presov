@@ -1,5 +1,5 @@
 import type { EventItem } from '@/lib/types';
-import { eventPath } from '@/lib/seo';
+import { eventPath, eventType } from '@/lib/seo';
 import { siteTimeZone } from '@/lib/utils';
 
 export function getLineupDate(event: EventItem) {
@@ -17,7 +17,7 @@ function getLineupMeta(event: EventItem) {
   const start = new Date(event.start_at);
   const time = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, hour: '2-digit', minute: '2-digit' }).format(start);
   const weekday = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, weekday: 'long' }).format(start);
-  const type = event.title.toLowerCase().includes('kavej') ? 'kino' : event.title.toLowerCase().includes('na skle') ? 'divadlo' : event.title.toLowerCase().includes('žije') ? 'festival' : 'koncert';
+  const type = eventType(event);
 
   return { weekday, time, type };
 }

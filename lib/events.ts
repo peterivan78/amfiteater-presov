@@ -9,6 +9,7 @@ export const currentProgram: EventItem[] = [
     title: 'IMT Smile',
     slug: 'imt-smile-2026',
     image_url: 'https://placehold.co/1080x1080/111111/FFFFFF/png?text=IMT+Smile',
+    event_type: 'koncert',
     start_at: '2026-06-27T18:00:00+02:00',
     display_date: '27. júna 2026',
     short_description: 'Letný koncert v Amfiteátri Prešov.',
@@ -23,6 +24,7 @@ export const currentProgram: EventItem[] = [
     title: 'Kavej',
     slug: 'kavej-2026',
     image_url: 'https://placehold.co/1080x1080/111111/FFFFFF/png?text=Kavej',
+    event_type: 'letné kino',
     start_at: '2026-07-18T20:30:00+02:00',
     display_date: '18. júla 2026',
     short_description: 'Premietanie filmu pod holým nebom.',
@@ -37,6 +39,7 @@ export const currentProgram: EventItem[] = [
     title: 'Hip Hop žije',
     slug: 'hip-hop-zije-2026',
     image_url: 'https://placehold.co/1080x1080/111111/FFFFFF/png?text=Hip+Hop+zije',
+    event_type: 'festival',
     start_at: '2026-07-31T18:00:00+02:00',
     end_at: '2026-08-01T23:00:00+02:00',
     short_description: 'Festival Hip Hop žije v Amfiteátri Prešov.',
@@ -51,6 +54,7 @@ export const currentProgram: EventItem[] = [
     title: 'Na skle maľované',
     slug: 'na-skle-malovane-2026',
     image_url: 'https://placehold.co/1080x1080/111111/FFFFFF/png?text=Na+skle+malovane',
+    event_type: 'divadlo',
     start_at: '2026-08-21T19:00:00+02:00',
     display_date: '21. augusta 2026',
     short_description: 'Hudobno-divadelné predstavenie Na skle maľované.',
@@ -87,7 +91,6 @@ export async function getEvents() {
       .select('*')
       .eq('is_published', true)
       .gte('start_at', now)
-      .order('is_featured', { ascending: false })
       .order('start_at', { ascending: true }),
     supabase
       .from('events')

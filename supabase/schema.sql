@@ -6,6 +6,7 @@ create table if not exists public.events (
   slug text unique not null,
   image_url text not null,
   cover_image_url text,
+  event_type text,
   start_at timestamptz not null,
   end_at timestamptz,
   short_description text,
@@ -18,6 +19,9 @@ create table if not exists public.events (
 
 alter table public.events
 add column if not exists cover_image_url text;
+
+alter table public.events
+add column if not exists event_type text;
 
 alter table public.events
 add column if not exists end_at timestamptz;
@@ -76,9 +80,9 @@ with check (
 -- Before enabling the admin-only policies in production, add every admin email:
 -- insert into public.admin_users (email) values ('admin@example.com') on conflict do nothing;
 
-insert into public.events (title, slug, image_url, start_at, short_description, ticket_url, is_featured, is_published)
+insert into public.events (title, slug, image_url, event_type, start_at, short_description, ticket_url, is_featured, is_published)
 values
-('Letný koncert v amfiteátri', 'letny-koncert-v-amfiteatri', 'https://placehold.co/1080x1080/png', now() + interval '14 days', 'Ukážkové budúce podujatie.', null, true, true),
-('Kino pod holým nebom', 'kino-pod-holym-nebom', 'https://placehold.co/1080x1080/png', now() + interval '30 days', 'Ukážkové filmové podujatie.', null, false, true),
-('Minulý festival', 'minuly-festival', 'https://placehold.co/1080x1080/png', now() - interval '30 days', 'Ukážkové archívne podujatie.', null, false, true)
+('Letný koncert v amfiteátri', 'letny-koncert-v-amfiteatri', 'https://placehold.co/1080x1080/png', 'koncert', now() + interval '14 days', 'Ukážkové budúce podujatie.', null, true, true),
+('Kino pod holým nebom', 'kino-pod-holym-nebom', 'https://placehold.co/1080x1080/png', 'letné kino', now() + interval '30 days', 'Ukážkové filmové podujatie.', null, false, true),
+('Minulý festival', 'minuly-festival', 'https://placehold.co/1080x1080/png', 'festival', now() - interval '30 days', 'Ukážkové archívne podujatie.', null, false, true)
 on conflict (slug) do nothing;

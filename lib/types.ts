@@ -4,6 +4,7 @@ export type EventItem = {
   slug: string;
   image_url: string;
   cover_image_url?: string | null;
+  event_type?: string | null;
   start_at: string;
   end_at?: string | null;
   display_date?: string;

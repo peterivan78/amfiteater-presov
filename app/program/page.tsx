@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getLineupDate } from '@/components/EventCard';
 import { getAllPublishedEvents } from '@/lib/events';
-import { eventImageAlt, eventPath, siteUrl } from '@/lib/seo';
+import { eventImageAlt, eventPath, eventType, siteUrl } from '@/lib/seo';
 import type { EventItem } from '@/lib/types';
 import { nbsp } from '@/lib/typography';
 import { siteTimeZone } from '@/lib/utils';
@@ -22,7 +22,7 @@ function getProgramMeta(event: EventItem) {
   const start = new Date(event.start_at);
   const weekday = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, weekday: 'long' }).format(start);
   const time = new Intl.DateTimeFormat('sk-SK', { timeZone: siteTimeZone, hour: '2-digit', minute: '2-digit' }).format(start);
-  const type = event.title.toLowerCase().includes('kavej') ? 'kino' : event.title.toLowerCase().includes('na skle') ? 'divadlo' : event.title.toLowerCase().includes('žije') ? 'festival' : 'koncert';
+  const type = eventType(event);
 
   return { weekday, time, type };
 }

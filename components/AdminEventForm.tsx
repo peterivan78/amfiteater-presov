@@ -13,6 +13,8 @@ const maxSourceSize = 25 * 1024 * 1024;
 
 type ImageKind = 'poster' | 'cover';
 
+const eventTypeOptions = ['koncert', 'festival', 'letné kino', 'divadlo', 'komunitné podujatie', 'workshop', 'prednáška', 'iné'];
+
 function loadImage(src: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
@@ -82,6 +84,10 @@ function formatSupabaseError(err: unknown) {
     return 'V Supabase tabuľke events chýba stĺpec end_at. Spustite aktualizovaný supabase/schema.sql.';
   }
 
+  if (message.includes('column') && message.includes('event_type')) {
+    return 'V Supabase tabuľke events chýba stĺpec event_type. Spustite aktualizovaný supabase/schema.sql.';
+  }
+
   if (message.includes('row-level security') || message.includes('permission denied') || message.includes('unauthorized')) {
     return 'Nemáte oprávnenie na túto operáciu. Skontrolujte, či je váš email v ADMIN_EMAILS aj v tabuľke public.admin_users a či sú aplikované Supabase policies.';
   }
@@ -117,6 +123,7 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
   const [title, setTitle] = useState(event?.title ?? '');
   const [startAt, setStartAt] = useState(toDatetimeLocalValue(event?.start_at));
   const [endAt, setEndAt] = useState(toDatetimeLocalValue(event?.end_at));
+  const [eventType, setEventType] = useState(event?.event_type ?? 'koncert');
   const [posterImageUrl, setPosterImageUrl] = useState(event?.image_url ?? '');
   const [coverImageUrl, setCoverImageUrl] = useState(event?.cover_image_url ?? '');
   const [description, setDescription] = useState(event?.short_description ?? '');
@@ -197,6 +204,7 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
       slug: `${toSlug(title)}-${new Date(startAt).getFullYear()}`,
       image_url: posterImageUrl,
       cover_image_url: coverImageUrl || null,
+      event_type: eventType,
       start_at: new Date(startAt).toISOString(),
       end_at: endAt ? new Date(endAt).toISOString() : null,
       short_description: description || null,
@@ -258,6 +266,15 @@ export function AdminEventForm({ event }: { event?: EventItem }) {
           <input className="w-full border border-black/15 px-4 py-3" type="datetime-local" value={endAt} onChange={(e) => setEndAt(e.target.value)} />
           <p className="mt-2 text-sm text-black/55">Voliteľné pre viacdňové podujatia.</p>
         </div>
+      </div>
+
+      <div>
+        <label className="mb-2 block text-sm font-medium">Typ podujatia</label>
+        <select className="w-full border border-black/15 px-4 py-3" value={eventType} onChange={(e) => setEventType(e.target.value)} required>
+          {eventTypeOptions.map((option) => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">

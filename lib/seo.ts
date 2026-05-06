@@ -31,6 +31,10 @@ export function eventYear(event: EventItem) {
 }
 
 export function eventType(event: EventItem) {
+  if (event.event_type) {
+    return event.event_type;
+  }
+
   const title = event.title.toLowerCase();
 
   if (title.includes('kavej') || title.includes('kino') || title.includes('film')) {
@@ -89,9 +93,37 @@ export function eventAboutParagraphs(event: EventItem) {
     ];
   }
 
+  if (type === 'divadlo') {
+    return [
+      `${title} je divadelné podujatie v priestore Amfiteáter Prešov v meste Prešov. Open-air prostredie amfiteátra vytvára prirodzenú scénu pre kultúrny večer pod holým nebom.`,
+      `Divadlo ${title} v Prešove je súčasťou programu, ktorý v Amfiteátri Prešov prepája mestský park, publikum a kultúru v dostupnom vonkajšom priestore.`
+    ];
+  }
+
+  if (type === 'komunitné podujatie') {
+    return [
+      `${title} je komunitné podujatie v priestore Amfiteáter Prešov v meste Prešov. Amfiteáter ponúka otvorené zázemie pre stretnutia, rozhovory a spoločné kultúrne zážitky.`,
+      `Podujatie ${title} v Prešove je súčasťou programu, ktorý využíva amfiteáter ako mestský priestor pre komunitu, susedské väzby a živú pamäť miesta.`
+    ];
+  }
+
+  if (type === 'workshop' || type === 'prednáška') {
+    return [
+      `${title} je podujatie v priestore Amfiteáter Prešov v meste Prešov. Program využíva dostupné open-air prostredie amfiteátra pre vzdelávanie, stretnutie a spoločný zážitok.`,
+      `Podujatie ${title} v Prešove rozširuje sezónny program Amfiteátra Prešov o formát zameraný na obsah, diskusiu a kontakt s návštevníkmi.`
+    ];
+  }
+
+  if (type === 'koncert') {
+    return [
+      `${title} je koncert v priestore Amfiteáter Prešov v meste Prešov. Open-air prostredie amfiteátra dáva podujatiu letnú atmosféru a prirodzené zázemie pre večer pod holým nebom.`,
+      `Koncert ${title} v Prešove je súčasťou sezónneho programu, ktorý v Amfiteátri Prešov prepája hudbu, mestský park a kultúrny priestor s dlhou tradíciou.`
+    ];
+  }
+
   return [
-    `${title} je koncert v priestore Amfiteáter Prešov v meste Prešov. Open-air prostredie amfiteátra dáva podujatiu letnú atmosféru a prirodzené zázemie pre večer pod holým nebom.`,
-    `Koncert ${title} v Prešove je súčasťou sezónneho programu, ktorý v Amfiteátri Prešov prepája hudbu, mestský park a kultúrny priestor s dlhou tradíciou.`
+    `${title} je podujatie v priestore Amfiteáter Prešov v meste Prešov. Open-air prostredie amfiteátra dáva programu prirodzené zázemie pre večer pod holým nebom.`,
+    `Podujatie ${title} v Prešove je súčasťou sezónneho programu, ktorý v Amfiteátri Prešov prepája mestský park a kultúrny priestor s dlhou tradíciou.`
   ];
 }
 

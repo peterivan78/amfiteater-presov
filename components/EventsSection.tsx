@@ -6,8 +6,7 @@ import { nbsp, upcomingEventsLabel } from '@/lib/typography';
 import { EventCard } from './EventCard';
 
 export function EventsSection({ upcoming, archive }: { upcoming: EventItem[]; archive: EventItem[] }) {
-  const sortedUpcoming = [...upcoming].sort((a, b) => Number(b.is_featured) - Number(a.is_featured));
-  const homepageEvents = sortedUpcoming.slice(0, 3);
+  const homepageEvents = [...upcoming].sort((a, b) => new Date(a.start_at).getTime() - new Date(b.start_at).getTime()).slice(0, 3);
 
   return (
     <>
