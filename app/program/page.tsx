@@ -96,7 +96,7 @@ export default async function ProgramPage() {
               alt="Amfiteáter Prešov"
               width={283}
               height={283}
-              className="h-14 w-auto"
+              className="h-28 w-auto"
             />
           </Link>
           <div className="hidden items-center gap-8 md:flex">

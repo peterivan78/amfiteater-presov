@@ -26,7 +26,7 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
               alt="Amfiteáter Prešov"
               width={283}
               height={283}
-              className="h-14 w-auto md:h-16"
+              className="h-28 w-auto md:h-32"
             />
           </Link>
           <div className="hidden items-center gap-10 md:flex">
