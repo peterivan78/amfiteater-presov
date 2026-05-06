@@ -225,7 +225,7 @@ export function buildStructuredData(events: EventItem[]) {
         '@id': organizationId,
         name: 'Amfiteáter Prešov',
         url: siteHomeUrl,
-        logo: `${siteUrl}/assets/logo.svg`,
+        logo: `${siteUrl}/assets/Amfiteater-Presov_lg-2lines_white-bg.svg`,
         email: 'info@amfiteaterpresov.sk',
         address: {
           '@type': 'PostalAddress',

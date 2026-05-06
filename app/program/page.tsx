@@ -92,11 +92,11 @@ export default async function ProgramPage() {
         <nav className="mb-16 flex items-start justify-between gap-6 text-[11px] font-semibold uppercase tracking-[0.22em]">
           <Link href="/" className="flex items-center" aria-label="Amfiteáter Prešov">
             <Image
-              src="/assets/logo.svg"
+              src="/assets/Amfiteater-Presov_lg-2lines_white-bg.svg"
               alt="Amfiteáter Prešov"
-              width={228}
-              height={60}
-              className="h-10 w-auto"
+              width={283}
+              height={283}
+              className="h-14 w-auto"
             />
           </Link>
           <div className="hidden items-center gap-8 md:flex">

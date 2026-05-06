@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteHomeUrl
   },
+  icons: {
+    icon: '/assets/AmfiteaterPresov_favicon.svg',
+    shortcut: '/assets/AmfiteaterPresov_favicon.svg'
+  },
   robots: {
     index: true,
     follow: true,

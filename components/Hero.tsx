@@ -22,11 +22,11 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
           <nav className="flex items-start justify-between gap-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#F5F1E8] md:text-[11px]">
           <Link href="/" className="flex items-center" aria-label="Amfiteáter Prešov">
             <Image
-              src="/assets/logo.svg"
+              src="/assets/Amfiteater-Presov_lg-2lines_dark-bg.svg"
               alt="Amfiteáter Prešov"
-              width={228}
-              height={60}
-              className="h-9 w-auto brightness-0 invert md:h-12"
+              width={283}
+              height={283}
+              className="h-14 w-auto md:h-16"
             />
           </Link>
           <div className="hidden items-center gap-10 md:flex">
