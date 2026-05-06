@@ -24,9 +24,9 @@ export function Hero({ hasArchive = false }: { hasArchive?: boolean }) {
             <Image
               src="/assets/Amfiteater-Presov_lg-2lines_dark-bg.svg"
               alt="Amfiteáter Prešov"
-              width={283}
-              height={283}
-              className="h-28 w-auto md:h-32"
+              width={226}
+              height={80}
+              className="h-14 w-auto md:h-[4.5rem]"
             />
           </Link>
           <div className="hidden items-center gap-10 md:flex">

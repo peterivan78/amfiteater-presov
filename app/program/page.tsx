@@ -94,9 +94,9 @@ export default async function ProgramPage() {
             <Image
               src="/assets/Amfiteater-Presov_lg-2lines_white-bg.svg"
               alt="Amfiteáter Prešov"
-              width={283}
-              height={283}
-              className="h-28 w-auto"
+              width={226}
+              height={80}
+              className="h-14 w-auto md:h-[4.5rem]"
             />
           </Link>
           <div className="hidden items-center gap-8 md:flex">
